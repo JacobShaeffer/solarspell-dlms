@@ -59,11 +59,10 @@ class ContentSheetUtil:
                             if each_content.get("Year Published"):
                                 try:
                                     content.published_date = datetime.date(each_content.get("Year Published"), 1, 1)
-                                except ValueError:
+                                except:
                                     content.published_date = None
                             content.modified_on = timezone.now()
                             content.additional_notes = each_content.get("Additional Notes")
-                            
                             active = each_content.get("Active")
                             if active:
                                 if type(active) == bool:
@@ -91,6 +90,7 @@ class ContentSheetUtil:
                             except Exception as e:
                                 raise Exception(str(e))
                             try:
+                                print(file_path)
                                 self.upload_content_file(file_path, content)
                             except (Exception, ValidationError) as e:
                                 content.delete()
@@ -137,7 +137,7 @@ class ContentSheetUtil:
                             if each_content.get("Year Published"):
                                 try:
                                     content.published_date = datetime.date(each_content.get("Year Published"), 1, 1)
-                                except ValueError:
+                                except:
                                     content.published_date = None
                             content.modified_on = timezone.now()
                             content.additional_notes = each_content.get("Additional Notes")
